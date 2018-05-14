@@ -1,0 +1,35 @@
+body,html{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: azure;
+}
+.registration {
+    height: calc(90% - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.registration div {
+    margin: 4px;
+}
+button {
+    margin: 10px;
+    width: 30%;
+}
+h1  {
+    text-align: center;
+}
+a {
+    text-decoration: none;
+    font-size: 23px;
+    padding: 30px;
+    text-align: right;
+    width: 48px;
+}
+a:hover {
+    color: darkred;
+}
