@@ -1,7 +1,5 @@
-window.onload = function() {
-    let token = localStorage.getItem('token');
-    let userDiv = document.getElementById('user');
-    let search = document.getElementById('search');
+    const token = localStorage.getItem('token');
+    const userDiv = document.getElementById('user');
 
     function loggedUser() {
         fetch('/home', {
@@ -10,9 +8,6 @@ window.onload = function() {
                 'Content-Type': 'application/json',
                 'Authorization': `bearer ${token}`
             },
-            // body: JSON.stringify({
-            //     token: token,
-            // })
         })
             .then((response) => {
                 if (response.status >= 200 && response.status < 300) {
@@ -29,6 +24,9 @@ window.onload = function() {
                 for( let i in userObj) {
                     if (i !== 'password' && i !== 'id') {
                         let elem = document.createElement('h3');
+                        if( i === 'name') {
+                            elem.classList.add('name')
+                        }
                         let elemText = document.createTextNode(String(userObj[i]));
                         elem.appendChild(elemText);
                         fragment.appendChild(elem);
@@ -46,4 +44,3 @@ window.onload = function() {
     } else {
         document.location.replace('/login');
     }
-};

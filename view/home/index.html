@@ -11,16 +11,26 @@
 <div class="home">
     <div id="user"></div>
 
-    <input type="text" id="search" placeholder="Search">
+    <input type="search" id="search" placeholder="Search">
     <div>
         <div class="buttons">
             <button id="myPosts">My posts</button>
             <button id="addNewPost">Add new post</button>
             <button id="friendsPost">Friends post</button>
         </div>
-        <div id="content"></div>
+        <div id="content">
+            <div id="contentAddPost">
+                <input type="text" id="titlePost" placeholder="Title">
+                <input type="text" id="contentPost" placeholder="Content">
+                <button id="addMyPost">Add</button>
+                <div id="messageRes"></div>
+            </div>
+            <div id="myPostMessage"></div>
+        </div>
     </div>
 </div>
 </body>
 <script src="main.js"></script>
+<script src="addPost.js"></script>
+<script src="myPost.js"></script>
 </html>

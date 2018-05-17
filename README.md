@@ -7,9 +7,8 @@
     <pre>sudo apt-get install npm</pre>
     ------------------
 3) PostgreSQL install
-    Ubuntu 16.04
     <pre>https://www.digitalocean.com/community/tutorials/postgresql-ubuntu-16-04-ru</pre>
-    Windows
+
     <pre>https://www.postgresql.org/download/windows/</pre>
     ------------------
 4) Install project

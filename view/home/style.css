@@ -7,23 +7,9 @@ body,html{
     flex-direction: column;
     background: azure;
 }
-.home {
-    height: calc(90% - 60px);
+aside {
     display: flex;
-    flex-direction: column;
-}
-.home div {
-    margin: 4px;
-}
-#user {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-}
-#user h3 {
-    padding: 30px;
-    margin: 0;
+    justify-content: space-between;
 }
 button {
     margin: 10px;
@@ -41,13 +27,59 @@ a:hover {
 h1  {
     text-align: center;
 }
+.home {
+    height: calc(90% - 60px);
+    display: flex;
+    flex-direction: column;
+}
+.home div {
+    margin: 4px;
+}
+#user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    min-height: 80px;
+}
+#user h3 {
+    padding: 30px;
+    margin: 0;
+}
+#contentAddPost {
+    display: none;
+}
+.activePostAdd {
+    display: flex!important;
+    justify-content: center;
+}
 .buttons {
     justify-content: space-evenly;
     display: flex;
 }
 #content {
-    min-height: 500px;
     width: 100%;
     background: white;
     content: ' ';
+}
+#content input {
+    width: 30%;
+    margin: 0 10px 0 10px;
+    padding: 10px;
+}
+#content button {
+    margin: 0;
+}
+#myPostMessage div {
+    background: darkgrey;
+    border: 1px solid;
+    padding: 10px;
+}
+#myPostMessage h5 {
+    text-align: center;
+    font-size: 14px;
+    margin: 0;
+}
+#myPostMessage p {
+    word-wrap: break-word;
 }
