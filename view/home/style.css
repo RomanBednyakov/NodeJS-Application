@@ -27,6 +27,12 @@ a:hover {
 h1  {
     text-align: center;
 }
+aside span ,h5 {
+    flex: 1;
+}
+aside span:last-child {
+    text-align: right;
+}
 .home {
     height: calc(90% - 60px);
     display: flex;
@@ -41,6 +47,7 @@ h1  {
     align-items: center;
     margin: 0;
     min-height: 80px;
+    font-size: 30px;
 }
 #user h3 {
     padding: 30px;
@@ -60,7 +67,7 @@ h1  {
 #content {
     width: 100%;
     background: white;
-    content: ' ';
+    padding: 10px;
 }
 #content input {
     width: 30%;
@@ -70,16 +77,40 @@ h1  {
 #content button {
     margin: 0;
 }
-#myPostMessage div {
+#posts div {
     background: darkgrey;
     border: 1px solid;
     padding: 10px;
 }
-#myPostMessage h5 {
+#posts h5 {
     text-align: center;
     font-size: 14px;
     margin: 0;
 }
-#myPostMessage p {
+#posts p {
     word-wrap: break-word;
+}
+.message {
+    display: flex;
+    justify-content: center;
+    background: black;
+    margin-top: 28px!important;
+}
+#messageAddNewPost {
+    color: white;
+    text-transform: uppercase;
+}
+#search {
+    width: 30%;
+    margin-left: calc(70% - 35%);
+}
+.buttonFriends {
+    width: 100%;
+}
+.buttonRemoveFriends {
+    background: red;
+    width: 100%;
+}
+.divFriends {
+    text-align: center;
 }

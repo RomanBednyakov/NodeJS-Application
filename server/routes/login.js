@@ -6,5 +6,4 @@ router.post('/', function (req, res) {
     login(req, res);
 });
 
-
 module.exports = router;

@@ -7,10 +7,8 @@
 </head>
 <body>
 <a href="/login">Login</a>
-<h1>HOME PAGE</h1>
 <div class="home">
     <div id="user"></div>
-
     <input type="search" id="search" placeholder="Search">
     <div>
         <div class="buttons">
@@ -23,9 +21,9 @@
                 <input type="text" id="titlePost" placeholder="Title">
                 <input type="text" id="contentPost" placeholder="Content">
                 <button id="addMyPost">Add</button>
-                <div id="messageRes"></div>
             </div>
-            <div id="myPostMessage"></div>
+            <div class="message"> <span id="messageAddNewPost"></span> </div>
+            <div id="posts"></div>
         </div>
     </div>
 </div>
@@ -33,4 +31,6 @@
 <script src="main.js"></script>
 <script src="addPost.js"></script>
 <script src="myPost.js"></script>
+<script src="search.js"></script>
+<script src="render.js"></script>
 </html>

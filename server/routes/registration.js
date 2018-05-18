@@ -6,5 +6,4 @@ router.post('/', function (req, res) {
     registration(req, res);
 });
 
-
 module.exports = router;

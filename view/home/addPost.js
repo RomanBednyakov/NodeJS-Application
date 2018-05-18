@@ -3,23 +3,18 @@ const contentAddPost = document.getElementById('contentAddPost');
 const titlePost = document.getElementById('titlePost');
 const contentPost = document.getElementById('contentPost');
 const addMyPost = document.getElementById('addMyPost');
-const messageRes = document.getElementById('messageRes');
-const nameUser = document.getElementsByClassName('name');
+const messageAddNewPost = document.getElementById('messageAddNewPost');
+const myPostSection = document.getElementsByClassName('myPostSection');
 
 function newDate() {
-    let d = new Date();
-    let curr_date = d.getDate();
-    let curr_month = d.getMonth() + 1;
-    let curr_year = d.getFullYear();
-    return curr_year + "-" + curr_month + "-" + curr_date;
+    let myDate = new Date();
+    myDate.setDate(myDate.getDate() + 20);
+    return ('0' + myDate.getDate()).slice(-2) + '.' + ('0' + (myDate.getMonth()+1)).slice(-2) + '.' + myDate.getFullYear();
 }
 
 addNewPost.addEventListener('click', () => {
     contentAddPost.classList.add('activePostAdd');
-    messageRes.innerText = '';
-    while (myPostMessage.firstChild) {
-        myPostMessage.removeChild(myPostMessage.firstChild);
-    }
+    render.renderRemovePost(true);
 });
 addMyPost.addEventListener('click', () => {
     fetch('/posts/addPost', {
@@ -31,7 +26,6 @@ addMyPost.addEventListener('click', () => {
             title: titlePost.value,
             content: contentPost.value,
             data: newDate(),
-            nameUser: nameUser[0].textContent,
             token
         }),
     })
@@ -46,23 +40,7 @@ addMyPost.addEventListener('click', () => {
                 throw error
             }
         })
-        .then((response) => {
-            // messageRes.innerText = response.message;
-            while (messageRes.firstChild) {
-                messageRes.removeChild(messageRes.firstChild);
-            }
-            let messageAddPost = document.createElement('span');
-            messageAddPost.appendChild(document.createTextNode(String(response.message)));
-            messageRes.appendChild(messageAddPost);
-        })
-        .catch((error) => {
-            console.log('error',error);
-            // while (messageRes.firstChild) {
-            //     messageRes.removeChild(messageRes.firstChild);
-            // }
-            // messageRes.innerText = error
-            messageAddPost.appendChild(document.createTextNode(String(error)));
-            messageRes.appendChild(messageAddPost);
-        });
+        .then((response) => render.renderMessagePost(String(response.message)))
+        .catch((error) => render.renderMessagePost(String(error)));
 
 });

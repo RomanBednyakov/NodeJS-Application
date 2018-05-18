@@ -1,11 +1,14 @@
 const sequelize = require('../sequelize/index');
 const jwt = require('jsonwebtoken');
 const jwtOptions = require('../passportJs/index').jwtOptions;
+const passwordHash = require('password-hash');
+
 const login = function (req, res) {
-    sequelize.query(`SELECT * FROM users WHERE name = '${req.body.name}' AND password = '${req.body.password}'`, {type: sequelize.QueryTypes.SELECT})
+    sequelize.query(`SELECT * FROM users WHERE name = '${req.body.name}'`, {type: sequelize.QueryTypes.SELECT})
         .then((users) => {
-            let user = users[0];
-            if(user.password === req.body.password) {
+            if (passwordHash.verify(req.body.password, users[0].password)) {
+                console.log('##',);
+                let user = users[0];
                 let payload = {user: user.id};
                 let token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '100m' });
                 res.json({message: "ok", token: token});

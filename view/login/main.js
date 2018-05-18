@@ -4,10 +4,6 @@ window.onload = function() {
     let submit = document.getElementById('submit');
     let errorDiv = document.getElementById('error');
 
-    function saveTokenToLocalStorage (response) {
-        localStorage.setItem('token', response);
-    }
-
     submit.addEventListener('click', () => {
         fetch('/login', {
             method: 'POST',
@@ -21,7 +17,7 @@ window.onload = function() {
         })
             .then((response) => {
                 if (response.status >= 200 && response.status < 300) {
-                    errorDiv.innerText = '';
+                    errorDiv.textContent = '';
                     return response.json();
                 } else {
                     let error = new Error(response.statusText);
@@ -30,12 +26,12 @@ window.onload = function() {
                 }
             })
             .then((response) => {
-                saveTokenToLocalStorage(response.token);
+                localStorage.setItem('token', response.token);
                 document.location.replace('/');
             })
             .catch((error) => {
                 console.log('error',error);
-                errorDiv.innerText = 'Username or password was entered incorrectly';
+                errorDiv.textContent = 'Username or password was entered incorrectly';
             });
     });
 };

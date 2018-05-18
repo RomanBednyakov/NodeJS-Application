@@ -2,9 +2,15 @@ const sequelize = require('../sequelize/index');
 const passport = require('passport');
 const passportJWT = require("passport-jwt");
 const config = require('../config/index');
+const jwt = require('jsonwebtoken');
 
 const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
+const authUser = function (req) {
+    let user = jwt.verify(req.body.token, config.secretOrKey);
+    req.body.userId = user.user;
+    delete req.body.token;
+};
 
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -25,7 +31,8 @@ passport.use(strategy);
 
 const passportJs = {
     passportJs : passport,
-    jwtOptions: jwtOptions
+    jwtOptions,
+    authUser
 };
 
 module.exports = passportJs;
