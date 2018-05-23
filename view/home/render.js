@@ -57,7 +57,7 @@ Render.prototype = {
                 let infoPost = document.createElement('aside');
 
                 let elemTextTitle = document.createTextNode(String(item.title));
-                let elemTextDate = document.createTextNode(String(item.data));
+                let elemTextDate = document.createTextNode(String(item.date));
                 let elemTextName = document.createTextNode(String(item.name));
                 let elemTextContent = document.createTextNode(String(item.content));
 

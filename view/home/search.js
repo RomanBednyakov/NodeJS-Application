@@ -16,7 +16,7 @@ searchInput.addEventListener('input', function () {
             .then((response) => {
                 if (response.status >= 200 && response.status < 300) {
                     return response.json();
-                } else if (response.status = 500) {
+                } else if (response.status === 500) {
                     document.location.replace('/login')
                 } else {
                     let error = new Error(response.statusText);
@@ -71,7 +71,7 @@ posts.addEventListener('click', (e) => {
             .then((response) => {
                 if (response.status >= 200 && response.status < 300) {
                     return response.json();
-                } else if (response.status = 500) {
+                } else if (response.status === 500) {
                     document.location.replace('/login')
                 } else {
                     let error = new Error(response.statusText);
