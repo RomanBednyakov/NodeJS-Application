@@ -24,7 +24,7 @@ Render.prototype = {
         users.forEach((item)=> {
             let elemButton = document.createElement('button');
             let infoPost = document.createElement('div');
-            if (item.followingId) {
+            if (item.following) {
                 elemButton.className = 'buttonRemoveFriends';
                 elemButton.appendChild(document.createTextNode('Remove friend'));
             } else  {

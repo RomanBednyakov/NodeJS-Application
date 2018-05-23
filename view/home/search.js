@@ -1,5 +1,4 @@
 const searchInput = document.getElementById('search');
-let friendsArr = {};
 let usersArr = [];
 searchInput.addEventListener('input', function () {
     render.renderRemovePost(false, true);
@@ -24,20 +23,15 @@ searchInput.addEventListener('input', function () {
                 }
             })
             .then((response) => {
-                friendsArr = [];
-                usersArr = [];
-                response.friends.forEach((item) => {
-                    friendsArr.push(item)
-                });
-                response.users.forEach((item) => {
-                    friendsArr.forEach((friend) => {
-                        if (String(friend.following) === String(item.id)) {
-                            item.followingId = friend.following;
-                        }
+                if (response.users) {
+                    usersArr = [];
+                    response.users.forEach((item) => {
+                        usersArr.push(item);
                     });
-                    usersArr.push(item);
-                });
-                render.renderFriends(usersArr, friendsArr);
+                    render.renderFriends(response.users);
+                } else {
+                    render.renderMessagePost(response.message)
+                }
             })
             .catch((error) => {
                 console.log('error',error);
@@ -50,8 +44,10 @@ posts.addEventListener('click', (e) => {
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.attributes[0].value === 'buttonRemoveFriends') {
             e.target.className = 'buttonFriends';
+            e.target.textContent = 'Add to friend';
         } else {
             e.target.className = 'buttonRemoveFriends';
+            e.target.textContent = 'Remove friend';
         }
         let name = e.target.parentElement.childNodes[0].textContent;
         let followingId = '';
@@ -78,9 +74,6 @@ posts.addEventListener('click', (e) => {
                     error.response = response;
                     throw error
                 }
-            })
-            .then((response) => {
-                console.log('##',response);
             })
             .catch((error) => {
                 console.log('error',error);
