@@ -5,7 +5,13 @@ const passport = require('./server/passportJs/index').passportJs;
 
 app.use('/login', express.static('view/login'));
 app.use('/registration', express.static('view/registration'));
+
 app.use('/', express.static('view/home'));
+
+app.use('/addPost', express.static('view/home'));
+app.use('/search', express.static('view/home'));
+app.use('/friendsPost', express.static('view/home'));
+app.use('/myPost', express.static('view/home'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

@@ -3,6 +3,9 @@ const posts = document.getElementById('posts');
 
 
 myPosts.addEventListener('click', () => {
+    // if (document.location.pathname !== '/myPost/') {
+    //     history.pushState({myPost: 'myPost'},'' ,'myPost');
+    // }
     render.renderRemovePost();
     fetch('/posts/myPost', {
         method: 'POST',

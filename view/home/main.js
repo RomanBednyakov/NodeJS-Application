@@ -1,6 +1,21 @@
 const token = localStorage.getItem('token');
 const userDiv = document.getElementById('user');
 
+const event = new Event('click');
+
+// function locations() {
+//     if (document.location.pathname === '/addPost/') {
+//         addNewPost.dispatchEvent(event);
+//     } else if (document.location.pathname === '/friendsPost/') {
+//         buttonPostFriends.dispatchEvent(event);
+//     } else if (document.location.pathname === '/search/') {
+//         searchInput.dispatchEvent(event);
+//     } else if (document.location.pathname === '/myPost/') {
+//         myPosts.dispatchEvent(event);
+//     }
+// }
+//
+// locations();
 function loggedUser() {
     fetch('/home', {
         method: 'GET',

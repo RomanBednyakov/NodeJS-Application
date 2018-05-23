@@ -1,6 +1,9 @@
 let buttonPostFriends = document.getElementById('friendsPost');
 buttonPostFriends.addEventListener('click', () => {
     render.renderRemovePost();
+    // if (document.location.pathname !== '/friendsPost/') {
+    //     history.pushState({friendsPost: 'friendsPost'},'' ,'friendsPost');
+    // }
     fetch('/posts/friendsPost', {
         method: 'POST',
         headers: {

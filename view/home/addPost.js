@@ -15,6 +15,9 @@ function newDate() {
 addNewPost.addEventListener('click', () => {
     contentAddPost.classList.add('activePostAdd');
     render.renderRemovePost(true);
+    // if (document.location.pathname !== '/addPost/') {
+    //     history.pushState({addPost: 'addPost'},'' ,'addPost');
+    // }
 });
 addMyPost.addEventListener('click', () => {
     fetch('/posts/addPost', {
