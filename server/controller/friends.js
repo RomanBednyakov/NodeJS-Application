@@ -13,7 +13,6 @@ function deleteFriend(req, res) {
 }
 
 function checkFriend(req, res) {
-    console.log('body',req.body);
 sequelize.query(`SELECT * FROM followers WHERE follower='${req.body.userId}' AND following='${req.body.followingId}'`, {type: sequelize.QueryTypes.SELECT})
     .then((friend) => {
         if (friend.length <= 0) {

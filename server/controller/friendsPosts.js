@@ -24,7 +24,7 @@ function selectFriendsPost(req, res) {
     // console.log('##',typeof req.body.userId);
     // sequelize.query(`SELECT userId, content, data, title FROM posts WHERE userid IN (SELECT following FROM followers WHERE follower='${req.body.userId}')`,{type: sequelize.QueryTypes.SELECT})
     // sequelize.query(`SELECT users.name, posts.content, posts.data, posts.title FROM users JOIN followers ON followers.follower='${req.body.userId}' JOIN posts ON posts.userid = followers.following`,{type: sequelize.QueryTypes.SELECT})
-    sequelize.query(`SELECT users.name, posts.content, posts.date, posts.title FROM users RIGHT JOIN posts ON users.id = posts.userid WHERE posts.userid IN (SELECT following FROM followers WHERE follower=${String(req.body.userId)})`, {type: sequelize.QueryTypes.SELECT})
+    sequelize.query(`SELECT users.name, posts.content, posts.data, posts.title FROM users RIGHT JOIN posts ON users.id::varchar = posts.userid WHERE posts.userid IN (SELECT following FROM followers WHERE follower::varchar=${req.body.userId}::varchar)`, {type: sequelize.QueryTypes.SELECT})
         .then((posts) => {
             console.log('posts',posts);
             // console.log('##',posts);
@@ -32,7 +32,7 @@ function selectFriendsPost(req, res) {
             // searchFriend(req, res ,posts);
         })
         .catch((error) =>{
-            // console.error('error',error);
+            console.error('error',error);
             res.status(401).json({message: error})
         });
 }

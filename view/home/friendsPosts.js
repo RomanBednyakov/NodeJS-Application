@@ -11,6 +11,8 @@ buttonPostFriends.addEventListener('click', () => {
         .then((response) => {
             if (response.status >= 200 && response.status < 300) {
                 return response.json();
+            } else if (response.status = 500) {
+                document.location.replace('/login')
             } else {
                 let error = new Error(response.statusText);
                 error.response = response;
@@ -18,7 +20,6 @@ buttonPostFriends.addEventListener('click', () => {
             }
         })
         .then((response) => {
-            console.log('##',response);
             render.renderPost(response.posts)
         })
         .catch((error) => {
