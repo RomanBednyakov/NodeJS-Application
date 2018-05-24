@@ -9,11 +9,11 @@ router.post('/addPost', function (req, res) {
     authUser(req, res);
     addPost(req, res);
 });
-router.post('/myPost', function (req, res) {
+router.get('/myPost', function (req, res) {
     authUser(req, res);
     myPost(req, res);
 });
-router.post('/friendsPost', function (req, res) {
+router.get('/friendsPost', function (req, res) {
     authUser(req, res);
     friendsPosts(req, res);
 });

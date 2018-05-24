@@ -2,17 +2,16 @@ const app = require('./app');
 const config = require('./server/config/index');
 const login = require('./server/routes/login');
 const registration = require('./server/routes/registration');
-const home = require('./server/routes/home');
+const users = require('./server/routes/users');
 const posts = require('./server/routes/posts');
-const search = require('./server/routes/search');
-const friends = require('./server/routes/friends');
+
+const followers = require('./server/routes/followers');
 
 app.use('/login', login);
 app.use('/registration', registration);
-app.use('/home', home);
+app.use('/users', users);
 app.use('/posts', posts);
-app.use('/search', search);
-app.use('/friends', friends);
+app.use('/followers', followers);
 
 app.listen(config.port, function () {
     console.log('Example app listening on port 3000!');

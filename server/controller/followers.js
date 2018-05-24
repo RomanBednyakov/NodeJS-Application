@@ -23,10 +23,10 @@ sequelize.query(`SELECT * FROM followers WHERE follower='${req.body.userId}' AND
     .catch((error) => res.status(401).json({message:error}));
 }
 
-const friends = function (req, res) {
+const followers = function (req, res) {
     sequelize.query("CREATE TABLE IF NOT EXISTS followers (id serial PRIMARY KEY, follower text, following text);")
         .then(() => checkFriend(req, res))
         .catch((error) => res.status(401).json({message:error}));
 };
 
-module.exports = friends;
+module.exports = followers;

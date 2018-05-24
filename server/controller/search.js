@@ -16,8 +16,8 @@ function searchFriend (req, res, users) {
 }
 
 const search = function (req, res) {
-    if (req.body.text !== '') {
-        sequelize.query(`SELECT name, id FROM users WHERE name LIKE '%${req.body.text}%' AND id != '${req.body.userId}'`, {type: sequelize.QueryTypes.SELECT})
+    if (req.headers.text !== '') {
+        sequelize.query(`SELECT name, id FROM users WHERE name LIKE '%${req.headers.text}%' AND id != '${req.body.userId}'`, {type: sequelize.QueryTypes.SELECT})
             .then((users) => {
                 if (users.length > 0) {
                     searchFriend(req, res, users)
