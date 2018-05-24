@@ -99,6 +99,7 @@ Api.prototype = {
             }),
         })
             .then((response) => {
+                console.log('##',111);
                 titlePost.value = '';
                 contentPost.value = '';
                 if (response.status >= 200 && response.status < 300) {
