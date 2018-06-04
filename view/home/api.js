@@ -35,7 +35,7 @@ Api.prototype = {
             .then((response) => {
                 if (response.status >= 200 && response.status < 300) {
                     return response.json();
-                } else if (response.status === 500) {
+                } else if (response.status === 401) {
                     document.location.replace('/login')
                 } else {
                     let error = new Error(response.statusText);
@@ -62,7 +62,7 @@ Api.prototype = {
             .then((response) => {
                 if (response.status >= 200 && response.status < 300) {
                     return response.json();
-                } else if (response.status === 500) {
+                } else if (response.status === 401) {
                     document.location.replace('/login')
                 } else {
                     let error = new Error(response.statusText);
@@ -90,21 +90,20 @@ Api.prototype = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': token
             },
             body: JSON.stringify({
                 title,
                 content,
-                date,
-                token
+                date
             }),
         })
             .then((response) => {
-                console.log('##',111);
                 titlePost.value = '';
                 contentPost.value = '';
                 if (response.status >= 200 && response.status < 300) {
                     return response.json();
-                } else if (response.status === 500) {
+                } else if (response.status === 401) {
                     document.location.replace('/login')
                 }
                 else {
@@ -116,21 +115,21 @@ Api.prototype = {
             .then((response) => render.renderMessagePost(String(response.message)))
             .catch((error) => render.renderMessagePost(String(error)));
     },
-    postFollowers : function (url ,followingId) {
+    postFollowers : function (url, method ,followingId) {
         fetch(url, {
-            method: 'POST',
+            method: method,
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': token
             },
             body: JSON.stringify({
-                followingId,
-                token
+                followingId
             }),
         })
             .then((response) => {
                 if (response.status >= 200 && response.status < 300) {
                     return response.json();
-                } else if (response.status === 500) {
+                } else if (response.status === 401) {
                     document.location.replace('/login')
                 } else {
                     let error = new Error(response.statusText);

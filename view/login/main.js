@@ -5,15 +5,19 @@ window.onload = function() {
     let errorDiv = document.getElementById('error');
 
     submit.addEventListener('click', () => {
-        fetch('/login', {
-            method: 'POST',
+        let loginData = {
+            name: name.value,
+            password: password.value,
+        };
+
+        const url = new URL('http://localhost:3000/auth');
+        url.search = new URLSearchParams(loginData);
+        fetch(url, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                name: name.value,
-                password: password.value,
-            }),
+            redirect: 'follow'
         })
             .then((response) => {
                 if (response.status >= 200 && response.status < 300) {
@@ -26,12 +30,16 @@ window.onload = function() {
                 }
             })
             .then((response) => {
-                localStorage.setItem('token', response.token);
-                document.location.replace('/');
+                if (response.message === 'ok') {
+                    localStorage.setItem('token', response.token);
+                    document.location.replace('/');
+                }else {
+                    throw response.message
+                }
             })
             .catch((error) => {
-                console.log('error',error);
-                errorDiv.textContent = 'Username or password was entered incorrectly';
+                console.error('error',error);
+                errorDiv.textContent = error;
             });
     });
 };

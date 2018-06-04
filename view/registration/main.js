@@ -6,7 +6,7 @@ window.onload = function() {
     let button = document.getElementById('registrationButton');
 
     button.addEventListener('click', () => {
-        fetch('/registration', {
+        fetch('http://localhost:3000/auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -27,7 +27,13 @@ window.onload = function() {
                     return error.json()
                 }
             })
-            .then(() => document.location.replace('/login'))
-            .catch((error) => console.log('error', error))
+            .then((response) => {
+                if (response.message === 'ok') {
+                    document.location.replace('/login')
+                }else {
+                    throw response.message
+                }
+            })
+            .catch((error) => console.error(error))
     });
 };

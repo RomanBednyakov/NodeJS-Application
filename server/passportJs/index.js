@@ -6,13 +6,22 @@ const jwt = require('jsonwebtoken');
 
 const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
-const authUser = function (req) {
-    if(req.method === 'GET') {
-        let user = jwt.verify(req.headers.authorization, config.secretOrKey);
-        req.body.userId = user.user;
-    }else {
-        let user = jwt.verify(req.body.token, config.secretOrKey);
-        req.body.userId = user.user;
+
+const authUser = function (req, res, next) {
+    let auth = req.get('Authorization');
+    if(auth && req.url !== '/users/auth') {
+        jwt.verify(req.headers.authorization, config.secretOrKey, {ignoreExpiration: false},  (err,decoded) => {
+            if(isNaN(err)) {
+                res.status(401).json({message:"token not verify"});
+            }
+            if(decoded.user !== undefined) {
+                req.body.userId = decoded.user;
+                next();
+            }
+        });
+    }
+    else {
+        next();
     }
 };
 

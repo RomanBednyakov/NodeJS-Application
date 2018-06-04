@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const followers = require('../controller/followers');
-const authUser = require('../passportJs/index').authUser;
+const addFollowers = require('../controller/addFollowers');
+const removeFollowers = require('../controller/removeFollowers');
 
-router.post('/', function (req, res) {
-    authUser(req,res);
-    followers(req, res);
+router.post('/', function (req, res, next) {
+    addFollowers(req, res, next);
+});
+router.delete('/', function (req, res, next) {
+    removeFollowers(req, res, next);
 });
 
 module.exports = router;
