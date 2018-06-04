@@ -12,21 +12,22 @@ searchInput.addEventListener('input', function () {
 });
 
 posts.addEventListener('click', (e) => {
+    let name = e.target.parentElement.childNodes[0].textContent;
+    let followingId = '';
+    usersArr.forEach((item) => {
+        if (item.name === name) {
+            followingId = item.id
+        }
+    });
     if (e.target.nodeName === 'BUTTON') {
         if (e.target.attributes[0].value === 'buttonRemoveFriends') {
+            api.postFollowers('/followers','DELETE', followingId);
             e.target.className = 'buttonFriends';
             e.target.textContent = 'Add to friend';
         } else {
+            api.postFollowers('/followers','POST', followingId);
             e.target.className = 'buttonRemoveFriends';
             e.target.textContent = 'Remove friend';
         }
-        let name = e.target.parentElement.childNodes[0].textContent;
-        let followingId = '';
-        usersArr.forEach((item) => {
-            if (item.name === name) {
-                followingId = item.id
-            }
-        });
-        api.postFollowers('/followers', followingId)
     }
 });

@@ -3,19 +3,15 @@ const router = express.Router();
 const addPost = require('../controller/addPost');
 const myPost = require('../controller/myPosts');
 const friendsPosts = require('../controller/friendsPosts');
-const authUser = require('../passportJs/index').authUser;
 
-router.post('/addPost', function (req, res) {
-    authUser(req, res);
-    addPost(req, res);
+router.post('/addPost', function (req, res, next) {
+    addPost(req, res, next);
 });
-router.get('/myPost', function (req, res) {
-    authUser(req, res);
-    myPost(req, res);
+router.get('/myPost', function (req, res, next) {
+    myPost(req, res, next);
 });
-router.get('/friendsPost', function (req, res) {
-    authUser(req, res);
-    friendsPosts(req, res);
+router.get('/friendsPost', function (req, res, next) {
+    friendsPosts(req, res, next);
 });
 
 

@@ -1,19 +1,14 @@
 const sequelize = require('../sequelize/index');
 
-function selectFriendsPost(req, res) {
-    sequelize.query(`SELECT users.name, posts.content, posts.date, posts.title FROM users RIGHT JOIN posts ON users.id::varchar = posts.user_id WHERE posts.user_id IN (SELECT following FROM followers WHERE follower::varchar=${req.body.userId}::varchar)`, {type: sequelize.QueryTypes.SELECT})
-        .then((posts) => {
+module.exports = async function (req, res, next) {
+    try {
+        let posts = await sequelize.query(`SELECT users.name, posts.content, posts.date, posts.title FROM users RIGHT JOIN posts ON users.id::varchar = posts.user_id WHERE posts.user_id IN (SELECT following FROM followers WHERE follower::varchar=${req.body.userId}::varchar)`, {type: sequelize.QueryTypes.SELECT});
+        if (posts.length > 0) {
             res.json({posts});
-        })
-        .catch((error) =>{
-            console.error('error',error);
-            res.status(401).json({message: error})
-        });
-}
-const friendsPosts = function (req, res) {
-    sequelize.query("CREATE TABLE IF NOT EXISTS posts (id serial PRIMARY KEY, content text, data text, title text, user_id text);")
-        .then(() => selectFriendsPost(req, res))
-        .catch((error) => res.status(401).json({message: error}));
+        } else {
+            res.json({message: 'There is no post'})
+        }
+    } catch(error){
+        next(error);
+    }
 };
-
-module.exports = friendsPosts;
